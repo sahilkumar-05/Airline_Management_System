@@ -1,0 +1,18 @@
+{
+  "name": "airline_reservation_system",
+  "version": "1.0.0",
+  "description": "A PostgreSQL-based Airline Reservation System with tables for flights, passengers, bookings, staff, payments, and more. Includes ERD and data for academic or learning use.",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
+  }
+}
