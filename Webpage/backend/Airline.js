@@ -9,7 +9,7 @@ fetch(Airline_URL).then(response=>{
         const row = document.createElement("tr");
         row.innerHTML = `
         <td>${Airline.airline_id}</td>
-        <td>${Airline.name}</t>
+        <td>${Airline.name}</td>
         <td>${Airline.country}</td>
         
         `;
