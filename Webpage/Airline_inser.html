@@ -13,22 +13,16 @@
 </head>
 
 <body>
-    <a href="Airline_inser.html">Insert Data</a>
 
-    <div class="table-responsive">
-        <table class="table table-primary" id="Airline">
-            <thead>
-                <tr>
-                    <th scope="col">airline_id</th>
-                    <th scope="col">name</th>
-                    <th scope="col">country</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-    </div>
+    <div class="container mb-4">
+    <h3>Add New Airline</h3>
+    <form id="airlineForm">
+        <input type="text" class="form-control mb-2" id="airline_id" placeholder="Airline ID" required />
+        <input type="text" class="form-control mb-2" id="name" placeholder="Airline Name" required />
+        <input type="text" class="form-control mb-2" id="country" placeholder="Country" required />
+        <button type="submit" class="btn btn-primary">Add Airline</button>
+    </form>
+</div>
 
 </body>
 

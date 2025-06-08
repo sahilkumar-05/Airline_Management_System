@@ -19,6 +19,20 @@ app.get('/', async (req, res) => {
 })
 
 
+app.post('/airline', async (req, res) => {
+    const { airline_id, name, country } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO airlines (airline_id, name, country) VALUES ($1, $2, $3) RETURNING *',
+            [airline_id, name, country]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+});
+
+
 app.get('/airline',async(req,res)=>{
     try{
         const result=await pool.query("Select * from airlines")
