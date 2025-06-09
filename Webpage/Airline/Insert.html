@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,24 +14,15 @@
 
 <body>
 
-    <div class="table-responsive">
-        <table class="table table-primary" id="Flights">
-            <thead>
-                <tr>
-                    <th scope="col">flight_id</th>
-                    <th scope="col">flight_code</th>
-                    <th scope="col">origin_airport</th>
-                    <th scope="col">origin_airport</th>
-                    <th scope="col">aircraft_id</th>
-                    <th scope="col">airline_id</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-    </div>
+    <div class="container mb-4">
+    <h3>Add New Airline</h3>
+    <form id="airlineForm">
+        <input type="text" class="form-control mb-2" id="airline_id" placeholder="Airline ID" required />
+        <input type="text" class="form-control mb-2" id="name" placeholder="Airline Name" required />
+        <input type="text" class="form-control mb-2" id="country" placeholder="Country" required />
+        <button type="submit" class="btn btn-primary">Add Airline</button>
+    </form>
+</div>
 
 </body>
 
@@ -45,4 +35,4 @@
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
 
-    <script src="backend/flights.js"></script>
+    <script src="backend/Airline.js"></script>
