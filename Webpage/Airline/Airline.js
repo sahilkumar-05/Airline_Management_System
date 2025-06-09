@@ -19,7 +19,6 @@ fetch(Airline_URL).then(response => {
 }).catch(err => {
     console.log(err.message);
 });
-
 // Handle form submission to add a new airline
 const form = document.getElementById("airlineForm");
 
@@ -47,12 +46,12 @@ form.addEventListener("submit", async (e) => {
         row.innerHTML = `
             <td>${newAirline.airline_id}</td>
             <td>${newAirline.name}</td>
-            <td>${newAirline.country}</td>
+            <td>${newAirline.country}</td>;
+        tbody.appendChild(row)
         `;
-        tbody.appendChild(row);
 
         form.reset(); // Clear form after successful submission
     } catch (err) {
         console.log(err.message);
     }
-});
+}); 
