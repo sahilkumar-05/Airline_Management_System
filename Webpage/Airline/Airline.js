@@ -10,17 +10,19 @@ fetch(Airline_URL).then(response => {
     data.forEach(Airline => {
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${Airline.airline_id}</td>
-            <td>${Airline.name}</td>
-            <td>${Airline.country}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${Airline.airline_id}</td>
+        
+            <td class="px-6 py-4 whitespace-nowrap">${Airline.name}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${Airline.country}</td>
         `;
         tbody.appendChild(row);
     });
 }).catch(err => {
     console.log(err.message);
 });
+
 // Handle form submission to add a new airline
-const form = document.getElementById("airlineForm");
+const form = document.getElementById("AirlineForm");
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -44,14 +46,16 @@ form.addEventListener("submit", async (e) => {
         const tbody = document.querySelector("#Airline tbody");
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${newAirline.airline_id}</td>
-            <td>${newAirline.name}</td>
-            <td>${newAirline.country}</td>;
+            <td class="px-6 py-4 whitespace-nowrap">${newAirline.airline_id}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${newAirline.name}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${newAirline.country}</td> 
+            `;
         tbody.appendChild(row)
-        `;
-
-        form.reset(); // Clear form after successful submission
+        
+form.reset();
+        
     } catch (err) {
-        console.log(err.message);
+        console.error(err.message);
+        alert("Error: " + err.message);
     }
-}); 
+});

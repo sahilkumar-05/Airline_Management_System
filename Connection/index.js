@@ -32,6 +32,19 @@ app.post('/airline', async (req, res) => {
     }
 });
 
+app.post('/airports', async (req, res) => {
+    const { airport_id, name, city,country } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO airports (airport_id, name, city, country) VALUES ($1, $2, $3, $4) RETURNING *',
+            [airport_id, name, city, country]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+});
+
 
 app.get('/airline',async(req,res)=>{
     try{
