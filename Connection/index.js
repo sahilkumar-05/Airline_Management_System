@@ -248,6 +248,23 @@ app.get('/staff', async (req, res) => {
         res.status(500).json({ Error: error.message });
     }
 });
+// Get staff count grouped by role
+app.get('/staff/role-distribution', async (req, res) => {
+  try {
+    const result = await pool.query(
+      ` SELECT r.role_name, COUNT(s.staff_id) AS count
+      FROM roles r
+      LEFT JOIN staff s ON r.role_id = s.role_id
+      GROUP BY r.role_name
+      ORDER BY r.role_name`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ Error: error.message });
+  }
+});
+
+
 // Add a new ticket
 app.post('/tickets', async (req, res) => {
     const { booking_id, seat_number, class: ticket_class, price } = req.body;

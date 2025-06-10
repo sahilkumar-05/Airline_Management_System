@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Class Distribution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #e0f2fe, #bae6fd, #7dd3fc);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white bg-opacity-90 backdrop-blur shadow-md sticky top-0 z-10">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <i class="fas fa-chart-pie text-2xl text-blue-600 mr-3"></i>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Airline Management System</h1>
+            <p class="text-xs sm:text-sm text-gray-600">Ticket Class Distribution</p>
+          </div>
+        </div>
+        <a href="Home.html" class="text-sm text-blue-600 hover:underline">← Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Chart Section -->
+  <main class="container mx-auto px-4 py-12">
+    <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6 text-center">Ticket Class Distribution</h2>
+      <canvas id="ticketClassChart" width="400" height="400"></canvas>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white bg-opacity-90 py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-sm text-gray-600">
+      &copy; 2025 Airline Management System. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Chart Script -->
+  <script>
+    const Ticket_URL = "https://congenial-waffle-9p65p9r7pv4fpxj9-6008.app.github.dev/tickets";
+
+    fetch(Ticket_URL)
+      .then(res => res.json())
+      .then(tickets => {
+        const classCounts = tickets.reduce((acc, ticket) => {
+          const cls = ticket.class.trim().toLowerCase();
+          acc[cls] = (acc[cls] || 0) + 1;
+          return acc;
+        }, {});
+
+        const labels = Object.keys(classCounts).map(cls =>
+          cls.charAt(0).toUpperCase() + cls.slice(1)
+        );
+        const data = Object.values(classCounts);
+
+        const ctx = document.getElementById("ticketClassChart").getContext("2d");
+        new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: "Ticket Class",
+              data: data,
+              backgroundColor: [
+                "#60a5fa", // Economy
+                "#fbbf24", // Business
+                "#f87171"  // First
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "bottom"
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    const label = tooltipItem.label || "";
+                    const value = tooltipItem.raw;
+                    return `${label}: ${value} ticket(s)`;
+                  }
+                }
+              },
+              datalabels: {
+                color: "#fff",
+                font: {
+                  weight: "bold",
+                  size: 14
+                },
+                formatter: function(value, context) {
+                  return `${context.chart.data.labels[context.dataIndex]}: ${value}`;
+                }
+              }
+            }
+          },
+          plugins: [ChartDataLabels]
+        });
+      })
+      .catch(err => console.error("Error loading chart data:", err));
+  </script>
+</body>
+</html>
