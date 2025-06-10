@@ -4,13 +4,12 @@ fetch(flight_URL).then(response=>{
         throw new Error("Failed to Fetch flight Data");
     return response.json();
 }).then(data=>{
-    const tbody = document.querySelector("#Flight tbody");
+    const tbody = document.querySelector("#Flights tbody");
     data.forEach(flight=>{
         const row = document.createElement("tr");
         row.innerHTML = `
         <td>${flight.flight_id}</td>
         <td>${flight.flight_code}</td>
-        
         <td>${flight.origin_airport}</td>
         <td>${flight.destination_airport}</td>
         <td>${flight.aircraft_id}</td>
