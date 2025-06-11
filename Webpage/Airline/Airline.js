@@ -11,7 +11,6 @@ fetch(Airline_URL).then(response => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td class="px-6 py-4 whitespace-nowrap">${Airline.airline_id}</td>
-        
             <td class="px-6 py-4 whitespace-nowrap">${Airline.name}</td>
             <td class="px-6 py-4 whitespace-nowrap">${Airline.country}</td>
         `;
