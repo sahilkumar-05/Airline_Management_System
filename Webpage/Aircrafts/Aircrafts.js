@@ -70,8 +70,7 @@ document.getElementById("AircraftForm").addEventListener("submit", async (e) => 
         // Reset the form
         e.target.reset();
         
-        // Show success message
-        alert("Aircraft added successfully!");
+       
     } catch (err) {
         console.error("Error adding aircraft:", err);
         alert(err.message);
